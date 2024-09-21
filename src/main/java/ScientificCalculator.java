@@ -40,6 +40,7 @@ public class ScientificCalculator {
             System.out.println("4. Power (x^b)");
             System.out.println("5. Exit");
             System.out.print("Choose an operation (1-5): ");
+//            while(!sc.hasNextInt()){}
             choice = sc.nextInt();
 
             switch (choice) {

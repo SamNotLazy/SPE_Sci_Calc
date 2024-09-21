@@ -18,10 +18,10 @@ FROM openjdk:18-jdk-slim
 WORKDIR /app
 
 # Copy the packaged JAR file from the build stage
-COPY --from=build /app/target/SPE_Sci_Calc-1.0-SNAPSHOT.jar /app/app.jar
+COPY --from=build /app/target/SPE_Sci_Calc-1.0-SNAPSHOT.jar /app/SPE_Sci_Calc.jar
 
 # Expose the port your application will run on (assuming 8080)
-EXPOSE 8081
+EXPOSE 8080
 
 # Command to run the application
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/SPE_Sci_Calc.jar"]

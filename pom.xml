@@ -32,7 +32,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Main-Class>com.ScientificCalculator.Main</Main-Class> <!-- Replace with your main class -->
+                            <Main-Class>ScientificCalculator</Main-Class> <!-- Replace with your main class -->
                         </manifestEntries>
                     </archive>
                 </configuration>
