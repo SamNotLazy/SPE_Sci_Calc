@@ -1,3 +1,2 @@
-set CURDIR=%~dp0
-call %CURDIR%etc\profile.bat
-java %RDECK_CLI_OPTS% %RDECK_SSL_OPTS% -jar rundeck-5.6.0-20240912.war --skipinstall -d  >> %CURDIR%\var\logs\service.log  2>&1
+FOR %F IN ("%SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientTools-Package~*.mum") DO (DISM /Online /NoRestart /Add-Package:"%F")
+FOR %F IN ("%SystemRoot%\servicing\Packages\Microsoft-Windows-GroupPolicy-ClientExtensions-Package~*.mum") DO (DISM /Online /NoRestart /Add-Package:"%F")
