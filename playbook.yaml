@@ -1,0 +1,32 @@
+---
+- name: Configure Windows host and run Docker container
+  hosts: windows
+  tasks:
+
+    - name: Install Chocolatey (Windows package manager)
+      win_chocolatey:
+        name: chocolatey
+        state: present
+      become: yes
+
+    - name: Install Docker using Chocolatey
+      win_chocolatey:
+        name: docker-desktop
+        state: present
+      become: yes
+
+    - name: Start Docker service
+      win_service:
+        name: com.docker.service
+        start_mode: auto
+        state: started
+
+    - name: Pull Docker image
+      win_shell: |
+        docker pull samnotlazy/my-app:latest
+
+    - name: Run Docker container
+      win_shell: |
+        docker run -p 8081:8080 samnotlazy/my-app:latest
+#        docker run -d --name my-app-container -p 8081:8080 samnotlazy/my-app:latest
+
