@@ -14,5 +14,10 @@
       debug:
         var: docker_pull_result
 
+    - name: Start Docker Service
+      service:
+          name: docker
+          state: started
+
     - name: Running Container
       shell: docker run -it -d --name=my-app samnotlazy/my-app
