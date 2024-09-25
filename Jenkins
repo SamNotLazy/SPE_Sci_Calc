@@ -1,0 +1,75 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE_NAME = 'my-app'
+        GITHUB_REPO_URL = 'https://github.com/SamNotLazy/SPE_Sci_Calc.git'
+    }
+
+    stages {
+
+        stage("Checkout") {
+            steps {
+                script {
+                    // get the github branch
+                    git branch: 'master', url: "${GITHUB_REPO_URL}"
+                }
+            }
+        }
+
+        stage("Build") {
+            steps {
+                script {
+                    // create the jar file
+
+                        bat 'mvn clean package'
+
+                }
+            }
+        }
+
+        stage("Test") {
+            steps {
+                script {
+                    // run unit tests
+
+                        bat 'mvn test'
+
+                }
+            }
+        }
+
+        stage("Dockerize") {
+            steps {
+                script {
+                    // build the docker image
+
+
+                    // push the image to docker hub
+                    	bat 'docker build -t my-app .'
+                  		bat 'docker login -u samnotlazy -p 123456789'
+                        bat 'docker tag my-app samnotlazy/my-app:latest'
+                        bat 'docker push samnotlazy/my-app'
+
+
+            }
+        }
+        }
+
+        stage("Deploy") {
+            steps {
+                script {
+                    bat 'wsl ansible-playbook -i inventory.ini deploy.yml'
+                }
+            }
+        }
+        stage("clean up") {
+            steps {
+                script {
+                    bat 'docker stop my-app'
+                    bat 'docker rm my-app'
+                }
+            }
+        }
+    }
+}
