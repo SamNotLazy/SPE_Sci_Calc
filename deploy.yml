@@ -1,6 +1,6 @@
 ---
 - name: Calculator MiniProject
-  hosts: localhost
+  hosts: all
   remote_user: dockeruser
   become: false
   tasks:
