@@ -8,18 +8,13 @@ pipeline {
 
     stages {
 
-        stage("Git Clone") {
+        stage("Checkout") {
             steps {
-
                 script {
-                    bat 'git clone https://github.com/SamNotLazy/SPE_Sci_Calc.git'
                     // get the github branch
                     git branch: 'master', url: "${GITHUB_REPO_URL}"
-
                 }
-
             }
-
         }
 
         stage("Build") {
@@ -44,7 +39,7 @@ pipeline {
             }
         }
 
-        stage("Containarize") {
+        stage("Dockerize") {
             steps {
                 script {
                     // build the docker image
@@ -73,13 +68,8 @@ pipeline {
                 script {
                     bat 'docker stop my-app'
                     bat 'docker rm my-app'
-
-
                 }
             }
         }
     }
-
-
-
 }
