@@ -2,7 +2,7 @@
 - name: Calculator MiniProject
   hosts: localhost
   remote_user: dockeruser
-  become: false
+  become: true
   tasks:
     - name: Pull Docker Image
       docker_image:

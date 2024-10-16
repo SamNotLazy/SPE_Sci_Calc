@@ -63,13 +63,6 @@ pipeline {
                 }
             }
         }
-        stage("clean up") {
-            steps {
-                script {
-                    bat 'docker stop my-app'
-                    bat 'docker rm my-app'
-                }
-            }
-        }
+
     }
 }
